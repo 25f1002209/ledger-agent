@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: ledger-agent
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: ROOT_URL        # the long exam API URL - paste it in the Render dashboard
+        sync: false
+      - key: LLM_API_KEY     # your AIPIPE_TOKEN (or any OpenAI-compatible key)
+        sync: false
